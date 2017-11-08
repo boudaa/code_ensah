@@ -5,6 +5,20 @@
 	id="WebApp_ID" version="3.1">
 	<display-name>ExemplesCoursJavaWeb</display-name>
 
+	<context-param>
+		<param-name>type_db</param-name>
+		<param-value>mysql</param-value>
+	</context-param>
+
+
+	<servlet>
+		<servlet-name>GetServletInitParams</servlet-name>
+		<servlet-class>com.servletparams.GetServletInitParams</servlet-class>
+		<init-param>
+			<param-name>param_test1</param-name>
+			<param-value>Un paramètre  de test</param-value>
+		</init-param>
+	</servlet>
 
 	<filter>
 		<filter-name>log</filter-name>
@@ -12,27 +26,27 @@
 	</filter>
 
 
-
 	<filter>
 		<filter-name>security</filter-name>
 		<filter-class>com.filter.SecurityFilter</filter-class>
 	</filter>
 
-
-
-
-
 	<filter-mapping>
-
 		<filter-name>log</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
 
 	<filter-mapping>
-
 		<filter-name>security</filter-name>
 		<url-pattern>/back/*</url-pattern>
 	</filter-mapping>
+
+
+	<servlet-mapping>
+		<servlet-name>GetServletInitParams</servlet-name>
+		<url-pattern>/GetServletInitParams</url-pattern>
+
+	</servlet-mapping>
 
 </web-app>
