@@ -1,9 +1,8 @@
-package com.context;
+package com.session;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,59 +13,60 @@ import javax.servlet.http.HttpSession;
 import com.common.Etudiant;
 
 /**
- * Cette classe servlet présente des exemples avec le context de servlet
+ * Cette classe servlet présente des exemples avec la session
  * 
  * @author BOUDAA
  *
  */
 
-@WebServlet("/contextExamples")
-public class ContextExamplesServlet extends HttpServlet {
+@WebServlet("/sessionExamples")
+public class SessionExamplesServlet extends HttpServlet {
 
-	public ContextExamplesServlet() {
+	public SessionExamplesServlet() {
 
 	}
 
 	/**
-	 * Cette méthode stocke un objet dans le context
+	 * Cette méthode stocke un objet dans la session
 	 * 
 	 * @param rq
 	 *            : l'objet représentant la requete
 	 * @param key
 	 *            : une chaine de caractère qui represente la clé à utiliser
-	 *            pour référencer l'objet dans le context
+	 *            pour référencer l'objet dans la session
 	 * @param object
-	 *            : l'objet à stocker dans le context
+	 *            : l'objet à stocker dans la session
 	 */
-	public void storeObjectInContext(HttpServletRequest rq, String key, Object object) {
+	public void storeObjectInSession(HttpServletRequest rq, String key, Object object) {
 
-		// On récupère le context
-		ServletContext context = rq.getServletContext();
+		// On récupère la session
 
-		// On stocke l'objet dans le contexte de l'application
+		HttpSession session = rq.getSession();
 
-		context.setAttribute(key, object);
+		// On stocke l'objet dans la session de l'utilisateur
+
+		session.setAttribute(key, object);
 
 	}
 
 	/**
-	 * Méthode qui permet de récupérer un objet du context
+	 * Méthode qui permet de récupérer un objet de la session
 	 * 
 	 * @param rq
 	 *            : l'objet représentant la requete
 	 * @param key
 	 *            : une chaine de caractère qui represente la clé à utiliser
-	 *            pour récupérer l'objet du context
+	 *            pour récupérer l'objet dans la session
 	 * @param object
-	 *            : l'objet à récupérer du context
+	 *            : l'objet à récupérer de la session
 	 */
-	public Object getObjectFromContext(HttpServletRequest rq, String key) {
+	public Object getObjectFromSession(HttpServletRequest rq, String key) {
 
-		// On récupère le context
-		ServletContext context = rq.getServletContext();
+		// On récupère la session
+		HttpSession session = rq.getSession();
 
-		// On récupère l'objet du context
-		return context.getAttribute(key);
+		// On récupère l'objet de la session en se basant sur la clé
+		return session.getAttribute(key);
 
 	}
 
@@ -95,10 +95,10 @@ public class ContextExamplesServlet extends HttpServlet {
 
 		// Suite à ce paramère execute l'une des taches c-dessous :
 
-		// Tache 1 : On stocke un objet étudiant dans le context
+		// Tache 1 : On stocke un objet étudiant dans la session
 		if ("store".equals(param)) {
 			Etudiant et = new Etudiant("Karimi", "Ali", 22);
-			storeObjectInContext(request, "etudiant", et);
+			storeObjectInSession(request, "etudiant", et);
 
 			// On insère du texte dans la réponse
 			writeParagraph(response, "L'étudiant est bien ajoutée dans la session");
@@ -108,12 +108,12 @@ public class ContextExamplesServlet extends HttpServlet {
 
 		else if ("get".equals(param)) {
 
-			// On récupère un étudiant du context
-			// L'objet récupéré du context est généralement de type Object,
+			// On récupère un étudiant de la session
+			// L'objet récupéré de la session est généralement de type Object,
 			// on s'assure qu'il s'agit exactement d'un objet de type Etudiant
 			// par instanceof avant de forcer la conversion
 			Etudiant etudiant = null;
-			Object obj = getObjectFromContext(request, "etudiant");
+			Object obj = getObjectFromSession(request, "etudiant");
 			if (obj instanceof Etudiant) {
 				etudiant = (Etudiant) obj;
 			}
@@ -128,7 +128,7 @@ public class ContextExamplesServlet extends HttpServlet {
 
 			else {
 				// On écrit un message indiquant que l'objet recherché n'existe
-				// pas dans le context
+				// pas dans la session
 				writeParagraph(response, "Aucun étudiant trouvé");
 
 			}
