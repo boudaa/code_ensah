@@ -15,7 +15,7 @@
 
 
 	<form
-		action="<%=request.getServletContext().getContextPath()%>/GameServlet">
+		action="<%=request.getServletContext().getContextPath()%>/back/GameServlet">
 		<input type="submit" value="Envoyer" />
 	</form>
 

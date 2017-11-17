@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1">
+	<display-name>ExemplesCoursJavaWeb</display-name>
+
+	<filter>
+		<filter-name>security</filter-name>
+		<filter-class>com.web.SecurityFilter</filter-class>
+	</filter>
+
+
+	<filter-mapping>
+		<filter-name>security</filter-name>
+		<url-pattern>/back/*</url-pattern>
+	</filter-mapping>
+
+
+	<servlet>
+
+		<servlet-name>gameServlet</servlet-name>
+		<servlet-class>com.web.GameServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>gameServlet</servlet-name>
+		<url-pattern>/back/GameServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+
+		<servlet-name>loginServlet</servlet-name>
+		<servlet-class>com.web.LoginServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>loginServlet</servlet-name>
+		<url-pattern>/LoginServlet</url-pattern>
+	</servlet-mapping>
+
+
+
+
+</web-app>

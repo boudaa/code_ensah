@@ -2,7 +2,6 @@ package com.web;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -18,7 +17,6 @@ import com.simu.MemoryDb;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -43,7 +41,7 @@ public class LoginServlet extends HttpServlet {
 
 				request.getSession().setAttribute("user", it);
 
-				response.sendRedirect(getServletContext().getContextPath() + "/pages/userHome.jsp");
+				response.sendRedirect(getServletContext().getContextPath() + "/back/userHome.jsp");
 
 				return;
 

@@ -14,11 +14,11 @@ import javax.servlet.http.HttpSession;
 import com.bo.GameState;
 import com.bo.Message;
 import com.bo.Utilisateur;
+import com.simu.MemoryDb;
 
 /**
  * Servlet implementation class GameServlet
  */
-@WebServlet("/GameServlet")
 public class GameServlet extends HttpServlet {
 
 	public GameServlet() {
@@ -46,10 +46,13 @@ public class GameServlet extends HttpServlet {
 			if (!gameSate.isGameOver()) {
 				gameSate.addMessage(new Message("Game Oveer", 0));
 
+				MemoryDb db = MemoryDb.getUniqueInstance();
+				db.
+
 			}
 			gameSate.setGameOver(true);
 
-			getServletContext().getRequestDispatcher("/pages/userHome.jsp").forward(request, response);
+			getServletContext().getRequestDispatcher("/back/userHome.jsp").forward(request, response);
 			return;
 
 		} else {
@@ -78,7 +81,7 @@ public class GameServlet extends HttpServlet {
 
 			user.incrementLance();
 
-			getServletContext().getRequestDispatcher("/pages/userHome.jsp").forward(request, response);
+			getServletContext().getRequestDispatcher("/back/userHome.jsp").forward(request, response);
 
 			return;
 

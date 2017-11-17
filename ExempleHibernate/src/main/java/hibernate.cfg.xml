@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+
+
+
+		<!-- local connection properties -->
+
+		<!-- l'adresse utl de la base de données -->
+
+		<property name="hibernate.connection.url">jdbc:mysql://localhost/base_gi2_vend</property>
+
+
+		<!-- Nom du pilote JDBC -->
+
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+
+		<!-- le login de l'utilisateur de la base de données -->
+
+		<property name="hibernate.connection.username">root</property>
+
+
+		<!-- le mot de passe de l'utilisateur de la base de données -->
+
+		<property name="hibernate.connection.password">boudaa</property>
+
+
+		<!-- Specifie le type de dialect utilisé, ici est celui de mysql car on 
+			utilise MySQl -->
+
+		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+
+
+		<!-- on affiche ou non SQL dans la console, mettre true dans la phase du 
+			développement et false en production -->
+
+		<property name="hibernate.show_sql">true</property>
+
+
+		<!-- On gnere ou non la base de données -->
+
+		<property name="hibernate.hbm2ddl.auto">update</property>
+
+		<!-- Le gestionnaire de transaction -->
+
+		<property name="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
+		<property name="hibernate.current_session_context_class">org.hibernate.context.ThreadLocalSessionContext</property>
+
+
+		<mapping class="com.bo.Etudiant" />
+
+
+
+
+	</session-factory>
+</hibernate-configuration>
