@@ -52,6 +52,8 @@ public class LoginServlet extends HttpServlet {
 				
 				messages.add(new Message("Login ou mot de passe incorrect", 0));
 				
+				
+				
 				request.setAttribute("messages", messages);
 
 				return;
