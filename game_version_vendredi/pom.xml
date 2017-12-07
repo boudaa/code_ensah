@@ -48,12 +48,13 @@
 
 
 
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>3.0-alpha-1</version>
-			<scope>provided</scope>
-		</dependency>
+	<!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
+<dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>javax.servlet-api</artifactId>
+    <version>3.0.1</version>
+    <scope>provided</scope>
+</dependency>
 
 
 		<dependency>
@@ -62,6 +63,7 @@
 			<version>2.3.2-b02</version>
 			<scope>provided</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>

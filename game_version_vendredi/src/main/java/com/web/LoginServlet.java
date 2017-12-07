@@ -39,8 +39,8 @@ public class LoginServlet extends HttpServlet {
 		UserDaoImpl userDao = new UserDaoImpl();
 
 		// On recherche l'utilisateur par login
-		List<Utilisateur> users = userDao.getByColValue("login", login, "Utilisateur");
-
+		List<Utilisateur> users = userDao.getByColValue("login", login.trim(), "Utilisateur");
+		System.out.println(users.size());
 		// Si un utilisateur existe
 		if (users.size() == 1) {
 

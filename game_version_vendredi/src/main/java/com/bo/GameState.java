@@ -3,6 +3,8 @@ package com.bo;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Transient;
+
 /**
  * Encapsule l'état d'une partie de jeu
  * 
@@ -16,6 +18,14 @@ public class GameState {
 	private boolean gameOver = false;
 
 	private List<Message> messages = new ArrayList<Message>();
+
+	public void reinit() {
+		gameOver = false;
+		messages = new ArrayList<Message>();
+		user.setScore(0);
+		user.setCompteurLancer(0);
+
+	}
 
 	public String toString() {
 		return "GameState [Score=" + user.getScore() + ", nombre lancés=" + user.getCompteurLancer() + ", messages="

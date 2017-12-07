@@ -4,12 +4,9 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	id="WebApp_ID" version="3.1">
 	<display-name>ExemplesCoursJavaWeb</display-name>
-
 	<welcome-file-list>
 		<welcome-file>pages/loginForm.jsp</welcome-file>
 	</welcome-file-list>
-
-
 	<filter>
 		<filter-name>security</filter-name>
 		<filter-class>com.web.SecurityFilter</filter-class>
@@ -34,8 +31,6 @@
 		<servlet-name>loginServlet</servlet-name>
 		<url-pattern>/LoginServlet</url-pattern>
 	</servlet-mapping>
-
-
 	<servlet>
 		<servlet-name>bestScore</servlet-name>
 		<servlet-class>com.web.BestScoreServlet</servlet-class>
@@ -44,4 +39,31 @@
 		<servlet-name>bestScore</servlet-name>
 		<url-pattern>/back/bestScore</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>InsertionServlet</servlet-name>
+		<servlet-class>com.web.InsertionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>InsertionServlet</servlet-name>
+		<url-pattern>/InsertionServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+
+		<servlet-name>deconnectServlet</servlet-name>
+		<servlet-class>com.web.DeconnectServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>deconnectServlet</servlet-name>
+		<url-pattern>/DeconnectServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>reinitGamesrvlt</servlet-name>
+		<servlet-class>com.web.ReinitGameServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>reinitGamesrvlt</servlet-name>
+		<url-pattern>/back/ReinitGameServlet</url-pattern>
+	</servlet-mapping>
+
 </web-app>

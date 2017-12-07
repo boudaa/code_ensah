@@ -1,3 +1,4 @@
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@page import="com.bo.Message"%>
@@ -5,52 +6,78 @@
 <%@page import="com.bo.GameState"%>
 <%@ page language="java" contentType="text/html; charset=windows-1256"
 	pageEncoding="windows-1256"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type"
-	content="text/html; charset=windows-1256">
-<title>Insert title here</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>Signin Template for Bootstrap</title>
+
+<!-- Bootstrap core CSS -->
+<link href="${pageContext.request.contextPath}/style/bootstrap.min.css"
+	rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="${pageContext.request.contextPath}/style/signin.css"
+	rel="stylesheet">
 </head>
+
 <body>
 
+	<div class="container">
 
-	<h1>Connexion</h1>
+		<form class="form-signin"
+			action="${pageContext.request.contextPath}/LoginServlet">
+			<div>
+				<a
+					href="${pageContext.request.contextPath}/pages/formInscription.jsp">S'inscrire</a>
+			</div>
+			<h2 class="form-signin-heading">Connexion</h2>
+			<label for="inputEmail" class="sr-only">Nom d'utilisateur</label> <input
+				type="text" class="form-control" placeholder="Nom d'utilisateur"
+				required autofocus name="login"> <label for="inputPassword"
+				class="sr-only">Mot de passe</label> <input type="password"
+				id="inputPassword" class="form-control" placeholder="Password" name="password"
+				required>
 
-<!-- 	//afficher les message avec JAVA  -->
-	
-<!--  		List<Message> messages = (List<Message>) request.getAttribute("messages"); -->
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign
+				in</button>
+		</form>
 
-<!--  		if (messages != null) { -->
-<!-- 			for (Message it : messages) { -->
-<!-- 			out.print(it); -->
-<!--  			} -->
-<!-- 		} -->
-
-
-
-	<!-- Ou mieux on affiche les message avec JSTL -->
-	<ul>
-
-		<c:forEach items="${requestScope.messages}" var="msg">
-
-			<c:if test="${msg.type == Message.WARN}">
-				<li style="color:red">${msg.text}</li>
-			</c:if>
+		<div>
 
 
+			<!-- 	//afficher les message avec JAVA  -->
 
-		</c:forEach>
-	</ul>
+			<!--  		List<Message> messages = (List<Message>) request.getAttribute("messages"); -->
 
-	<form action="${pageContext.request.contextPath}/LoginServlet">
-
-		<label>Login</label> <input type="text" name="login"> <br />
-		<label>Password</label> <input type="password" name="password">
-		<br /> <input type="submit" value="Envoyer" />
-	</form>
+			<!--  		if (messages != null) { -->
+			<!-- 			for (Message it : messages) { -->
+			<!-- 			out.print(it); -->
+			<!--  			} -->
+			<!-- 		} -->
 
 
 
+			<!-- Ou mieux on affiche les message avec JSTL -->
+			<ul>
+
+				<c:forEach items="${requestScope.messages}" var="msg">
+
+					<c:if test="${msg.type == Message.WARN}">
+						<li style="color: red">${msg.text}</li>
+					</c:if>
+
+
+
+				</c:forEach>
+			</ul>
+		</div>
+	</div>
+	<!-- /container -->
 </body>
 </html>

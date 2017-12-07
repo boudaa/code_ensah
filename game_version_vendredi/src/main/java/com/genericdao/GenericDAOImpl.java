@@ -20,10 +20,10 @@ import org.hibernate.Transaction;
  */
 public class GenericDAOImpl<T> {
 
-	/** La classe BO manipulÈ par le DAO */
+	/** La classe BO manipul√© par le DAO */
 	protected Class<T> boClass;
 
-	/** UtilisÈ par tous les DAOs pour enregitrer les logs */
+	/** Utilis√© par tous les DAOs pour enregitrer les logs */
 	protected final Logger LOGGER;
 
 	/** la fabrique des session */
@@ -35,7 +35,7 @@ public class GenericDAOImpl<T> {
 
 		LOGGER = Logger.getLogger(boClass);
 
-		LOGGER.debug("le dao de " + boClass + " a ÈtÈ initialisÈ");
+		LOGGER.debug("le dao de " + boClass + " a √©t√© initialis√©");
 	}
 
 	/**
@@ -47,7 +47,7 @@ public class GenericDAOImpl<T> {
 	 */
 	protected void handleDaoOpError(Transaction tx, RuntimeException ex) {
 
-		// Si l'objet de tx est initialisÈ
+		// Si l'objet de tx est initialis√©
 		if (tx != null) {
 
 			// Annuler la transaction
@@ -55,9 +55,9 @@ public class GenericDAOImpl<T> {
 		}
 
 		// On trace l'erreur dans le journal
-		LOGGER.error("erreur d'annulation de la transaction ‡ cause de l'exception : " + ex);
+		LOGGER.error("erreur d'annulation de la transaction √© cause de l'exception : " + ex);
 
-		// On remonte l'exception (faut pas cacher les problËmes)
+		// On remonte l'exception (faut pas cacher les probl√©mes)
 		throw new DataAccessLayerException(ex);
 
 	}
@@ -85,22 +85,22 @@ public class GenericDAOImpl<T> {
 	}
 
 	/**
-	 * Permet de savoir si la session a dÈj‡ une transaction active (dÈj‡
-	 * initialisÈe par une autre mÈthode)
+	 * Permet de savoir si la session a d√©j√© une transaction active (d√©j√©
+	 * initialis√©e par une autre m√©thode)
 	 * 
 	 * @param s
 	 * @return
 	 */
 	protected boolean anActiveTransactionExist(Session s) {
 		if (s != null && s.getTransaction() != null)
-			// retourne true si la session a dÈj‡ une transaction active
+			// retourne true si la session a d√©j√© une transaction active
 			return s.getTransaction().isActive();
 
 		return false;
 	}
 
 	/**
-	 * Permet de persister (sauvgarder) un objet dans la base de donnÈes
+	 * Permet de persister (sauvgarder) un objet dans la base de donn√©es
 	 * 
 	 * @param o
 	 * 
@@ -108,24 +108,24 @@ public class GenericDAOImpl<T> {
 	 */
 	public Long create(T o) {
 
-		LOGGER.debug("appel de la mÈthode create");
+		LOGGER.debug("appel de la m√©thode create");
 
 		// On obtient la session en cours
 		Session s = getSession();
 
 		Long id = null;
 
-		// Si une transaction est dÈj‡ dÈmarrÈ (typiquement par un filtre ou la
-		// couche service mÈtier)
+		// Si une transaction est d√©j√© d√©marr√© (typiquement par un filtre ou la
+		// couche service m√©tier)
 		if (anActiveTransactionExist(s)) {
 
-			LOGGER.debug("le DAO utilise la transaction  dÈj‡ dÈmarrÈe dans les couches supÈrieures");
+			LOGGER.debug("le DAO utilise la transaction  d√©j√© d√©marr√©e dans les couches sup√©rieures");
 
-			// Dans ce cas on appËle directement la mÈthode hibernate
+			// Dans ce cas on app√©le directement la m√©thode hibernate
 			id = (Long) s.save(o);
 
 		} else {
-			// Dans le cas contraire le DAO va dÈmarrer sa propre transaction
+			// Dans le cas contraire le DAO va d√©marrer sa propre transaction
 
 			LOGGER.debug("le DAO initialise sa propre transaction");
 
@@ -133,17 +133,17 @@ public class GenericDAOImpl<T> {
 
 			try {
 
-				// On dÈmarre une transaction localement
+				// On d√©marre une transaction localement
 				tx = s.beginTransaction();
 
-				// On fait les opÈration
+				// On fait les op√©ration
 
 				id = (Long) s.save(o);
 
 				// On valide la transaction
 				tx.commit();
 			} catch (RuntimeException ex) {
-				// En cas de problËmes on annule la transaction
+				// En cas de probl√©mes on annule la transaction
 				// et on trace
 				handleDaoOpError(tx, ex);
 			} finally {
@@ -152,29 +152,29 @@ public class GenericDAOImpl<T> {
 			}
 		}
 
-		LOGGER.debug("fin d'appel de la mÈthode save avec succËs ");
+		LOGGER.debug("fin d'appel de la m√©thode save avec succ√©s ");
 
 		return id;
 	}
 
 	/**
-	 * UtilisÈ pour mettre ‡ jour une entitÈ dÈtachÈe (ratache un objet ‡ la
-	 * session pour qu'il soit gÈrÈ => donc synchronisÈ automatiquement avec la
-	 * base de donnÈes)
+	 * Utilis√© pour mettre √© jour une entit√© d√©tach√©e (ratache un objet √© la
+	 * session pour qu'il soit g√©r√© => donc synchronis√© automatiquement avec la
+	 * base de donn√©es)
 	 * 
 	 * @param o
 	 */
 	public void update(T o) {
 
-		LOGGER.debug("appel de la mÈthode save");
+		LOGGER.debug("appel de la m√©thode save");
 
 		// On obtient la session en cours
 		Session s = getSession();
 
-		// Si une transaction est dÈj‡ dÈmarrÈ (typiquement par un filtre ou la
+		// Si une transaction est d√©j√© d√©marr√© (typiquement par un filtre ou la
 		if (anActiveTransactionExist(s)) {
 
-			// Dans ce cas c'est la couche supÈrieure qui gere la session et la
+			// Dans ce cas c'est la couche sup√©rieure qui gere la session et la
 			// transaction
 			s.update(o);
 
@@ -185,7 +185,7 @@ public class GenericDAOImpl<T> {
 
 			try {
 
-				// On dÈmarre une transaction localement
+				// On d√©marre une transaction localement
 				tx = s.beginTransaction();
 
 				s.update(o);
@@ -193,7 +193,7 @@ public class GenericDAOImpl<T> {
 				// On valide la transaction
 				tx.commit();
 			} catch (RuntimeException ex) {
-				// En cas de problËmes en annule la transaction
+				// En cas de probl√©mes en annule la transaction
 				handleDaoOpError(tx, ex);
 			} finally {
 				// Fermer la session s'elle est encore ouverte
@@ -201,32 +201,32 @@ public class GenericDAOImpl<T> {
 			}
 		}
 
-		LOGGER.debug("fin d'appel de la mÈthode save avec succËs ");
+		LOGGER.debug("fin d'appel de la m√©thode save avec succ√©s ");
 
 	}
 
 	/**
-	 * permet de rÈcupÈrer toute les entitÈs de type T
+	 * permet de r√©cup√©rer toute les entit√©s de type T
 	 * 
 	 * @return
 	 * @throws EntityNotFoundException
 	 */
 	public List<T> getAll() throws EntityNotFoundException {
 
-		LOGGER.debug("appel de la mÈthode save");
+		LOGGER.debug("appel de la m√©thode save");
 
 		// On obtient la session en cours
 		Session s = getSession();
 
 		List<T> list = null;
 
-		// Si une transaction est dÈj‡ dÈmarrÈ (typiquement par un filtre ou la
+		// Si une transaction est d√©j√© d√©marr√© (typiquement par un filtre ou la
 		if (anActiveTransactionExist(s)) {
 
-			// Dans ce cas c'est la couche supÈrieure qui gere la session et la
+			// Dans ce cas c'est la couche sup√©rieure qui gere la session et la
 			// transaction
 
-			// On a utilisÈ l'API Criteria de Hibernate
+			// On a utilis√© l'API Criteria de Hibernate
 			list = s.createCriteria(boClass).list();
 
 		} else {
@@ -236,14 +236,14 @@ public class GenericDAOImpl<T> {
 
 			try {
 
-				// On dÈmarre une transaction localement
+				// On d√©marre une transaction localement
 				tx = s.beginTransaction();
 
 				list = s.createCriteria(boClass).list();
 
 				tx.commit();
 			} catch (RuntimeException ex) {
-				// En cas de problËmes en annule la transaction
+				// En cas de probl√©mes en annule la transaction
 				handleDaoOpError(tx, ex);
 			} finally {
 				// Fermer la session s'elle est encore ouverte
@@ -251,8 +251,8 @@ public class GenericDAOImpl<T> {
 			}
 		}
 
-		// Si la liste est vide on dÈclenche un exception (c'est un choix de
-		// conception, on peut Ègalement retourner une liste vide)
+		// Si la liste est vide on d√©clenche un exception (c'est un choix de
+		// conception, on peut √©galement retourner une liste vide)
 		if (list == null || list.size() == 0)
 			throw new EntityNotFoundException();
 
@@ -260,25 +260,25 @@ public class GenericDAOImpl<T> {
 	}
 
 	/**
-	 * permet de rÈcupÈrer toute les entitÈs de type T mais avec une limite de
-	 * nombre de rÈsultats ‡ retourner
+	 * permet de r√©cup√©rer toute les entit√©s de type T mais avec une limite de
+	 * nombre de r√©sultats √© retourner
 	 * 
 	 * @return
 	 * @throws EntityNotFoundException
 	 */
 	public List<T> getAll(int maxResults) throws EntityNotFoundException {
 
-		LOGGER.debug("appel de la mÈthode save");
+		LOGGER.debug("appel de la m√©thode save");
 
 		// On obtient la session en cours
 		Session s = getSession();
 
 		List<T> list = null;
 
-		// Si une transaction est dÈj‡ dÈmarrÈ (typiquement par un filtre ou la
+		// Si une transaction est d√©j√© d√©marr√© (typiquement par un filtre ou la
 		if (anActiveTransactionExist(s)) {
 
-			// Dans ce cas c'est la couche supÈrieure qui gere la session et la
+			// Dans ce cas c'est la couche sup√©rieure qui gere la session et la
 			// transaction
 			list = s.createCriteria(boClass).setMaxResults(maxResults).list();
 
@@ -289,14 +289,14 @@ public class GenericDAOImpl<T> {
 
 			try {
 
-				// On dÈmarre une transaction localement
+				// On d√©marre une transaction localement
 				tx = s.beginTransaction();
 
 				list = s.createCriteria(boClass).setMaxResults(maxResults).list();
 
 				tx.commit();
 			} catch (RuntimeException ex) {
-				// En cas de problËmes en annule la transaction
+				// En cas de probl√©mes en annule la transaction
 				handleDaoOpError(tx, ex);
 			} finally {
 				// Fermer la session s'elle est encore ouverte
@@ -325,20 +325,20 @@ public class GenericDAOImpl<T> {
 	 */
 	public List<T> getByColValue(String pColName, String pColVal, String pClassName) throws EntityNotFoundException {
 
-		LOGGER.debug("appel de la mÈthode getByColValue");
+		LOGGER.debug("appel de la m√©thode getByColValue");
 
 		// On obtient la session en cours
 		Session s = getSession();
 
 		List<T> list = new ArrayList<T>();
 
-		// Si une transaction est dÈj‡ dÈmarrÈ (typiquement par un filtre ou la
+		// Si une transaction est d√©j√© d√©marr√© (typiquement par un filtre ou la
 		if (anActiveTransactionExist(s)) {
 
-			// Dans ce cas c'est la couche supÈrieure qui gere la session et la
+			// Dans ce cas c'est la couche sup√©rieure qui gere la session et la
 			// transaction
 
-			// Une requete paramÈtrÈe Ècrite avec HQL de Hibernate
+			// Une requete param√©tr√©e √©crite avec HQL de Hibernate
 			Query q = s.createQuery("from " + pClassName + " where " + pColName + "=?");
 			q.setParameter(0, pColVal);
 			list = q.list();
@@ -350,17 +350,17 @@ public class GenericDAOImpl<T> {
 
 			try {
 
-				// On dÈmarre une transaction localement
+				// On d√©marre une transaction localement
 				tx = s.beginTransaction();
 
-				// Une requete paramÈtrÈe Ècrite avec HQL de Hibernate
+				// Une requete param√©tr√©e √©crite avec HQL de Hibernate
 				Query q = s.createQuery("from " + pClassName + " where " + pColName + "=?");
 				q.setParameter(0, pColVal);
 				list = q.list();
 
 				tx.commit();
 			} catch (RuntimeException ex) {
-				// En cas de problËmes en annule la transaction
+				// En cas de probl√©mes en annule la transaction
 				handleDaoOpError(tx, ex);
 			} finally {
 				// Fermer la session s'elle est encore ouverte
@@ -372,7 +372,7 @@ public class GenericDAOImpl<T> {
 	}
 
 	/**
-	 * Permet de supprimer une entitÈe dÈfinit par son identifiant
+	 * Permet de supprimer une entit√©e d√©finit par son identifiant
 	 * 
 	 * @param pId
 	 * @throws EntityNotFoundException
@@ -380,7 +380,7 @@ public class GenericDAOImpl<T> {
 	 */
 	public void delete(Long pId) throws EntityNotFoundException, DataAccessLayerException {
 
-		LOGGER.debug("appel de la mÈthode delete");
+		LOGGER.debug("appel de la m√©thode delete");
 
 		T obj = (T) findById(pId);
 
@@ -389,10 +389,10 @@ public class GenericDAOImpl<T> {
 
 		Long id = null;
 
-		// Si une transaction est dÈj‡ dÈmarrÈ (typiquement par un filtre ou la
+		// Si une transaction est d√©j√© d√©marr√© (typiquement par un filtre ou la
 		if (anActiveTransactionExist(s)) {
 
-			// Dans ce cas c'est la couche supÈrieure qui gere la session et la
+			// Dans ce cas c'est la couche sup√©rieure qui gere la session et la
 			// transaction
 			s.delete(obj);
 
@@ -403,7 +403,7 @@ public class GenericDAOImpl<T> {
 
 			try {
 
-				// On dÈmarre une transaction localement
+				// On d√©marre une transaction localement
 				tx = s.beginTransaction();
 
 				s.delete(obj);
@@ -411,7 +411,7 @@ public class GenericDAOImpl<T> {
 				// On valide la transaction
 				tx.commit();
 			} catch (RuntimeException ex) {
-				// En cas de problËmes en annule la transaction
+				// En cas de probl√©mes en annule la transaction
 				handleDaoOpError(tx, ex);
 			} finally {
 				// Fermer la session s'elle est encore ouverte
@@ -419,12 +419,12 @@ public class GenericDAOImpl<T> {
 			}
 		}
 
-		LOGGER.debug("fin d'appel de la mÈthode delete avec succËs ");
+		LOGGER.debug("fin d'appel de la m√©thode delete avec succ√©s ");
 
 	}
 
 	/**
-	 * Permet de rechercher une entitÈ par son identifiant
+	 * Permet de rechercher une entit√© par son identifiant
 	 * 
 	 * @param pId
 	 * @return
@@ -432,17 +432,17 @@ public class GenericDAOImpl<T> {
 	 * @throws DataAccessLayerException
 	 */
 	public T findById(Long pId) throws EntityNotFoundException, DataAccessLayerException {
-		LOGGER.debug("appel de la mÈthode findById");
+		LOGGER.debug("appel de la m√©thode findById");
 
 		// On obtient la session en cours
 		Session s = getSession();
 
 		T obj = null;
 
-		// Si une transaction est dÈj‡ dÈmarrÈ (typiquement par un filtre ou la
+		// Si une transaction est d√©j√© d√©marr√© (typiquement par un filtre ou la
 		if (anActiveTransactionExist(s)) {
 
-			// Dans ce cas c'est la couche supÈrieure qui gere la session et la
+			// Dans ce cas c'est la couche sup√©rieure qui gere la session et la
 			// transaction
 			obj = (T) s.get(boClass, pId);
 
@@ -453,14 +453,14 @@ public class GenericDAOImpl<T> {
 
 			try {
 
-				// On dÈmarre une transaction localement
+				// On d√©marre une transaction localement
 				tx = s.beginTransaction();
 
 				obj = (T) s.get(boClass, pId);
 
 				tx.commit();
 			} catch (RuntimeException ex) {
-				// En cas de problËmes en annule la transaction
+				// En cas de probl√©mes en annule la transaction
 				handleDaoOpError(tx, ex);
 			} finally {
 				// Fermer la session s'elle est encore ouverte
@@ -475,7 +475,7 @@ public class GenericDAOImpl<T> {
 	}
 
 	/**
-	 * Permet de tester si une entitÈ existe en base de donnÈes
+	 * Permet de tester si une entit√© existe en base de donn√©es
 	 * 
 	 * @param pId
 	 * @return

@@ -1,5 +1,6 @@
 package com.bo;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -28,6 +29,7 @@ public class Utilisateur {
 
 	private String prenom;
 
+	@Column(name = "login", unique = true)
 	private String login;
 
 	private String password;
@@ -41,6 +43,17 @@ public class Utilisateur {
 	private int compteurLancer;
 
 	public Utilisateur() {
+	}
+
+	public Utilisateur(String nom, String prenom, String login, String password, double score, double bestScore,
+			int compteurLancer) {
+		this.nom = nom;
+		this.prenom = prenom;
+		this.login = login;
+		this.password = password;
+		this.score = score;
+		this.bestScore = bestScore;
+		this.compteurLancer = compteurLancer;
 	}
 
 	@Override

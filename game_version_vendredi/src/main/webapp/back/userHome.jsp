@@ -9,13 +9,28 @@
 <meta http-equiv="Content-Type"
 	content="text/html; charset=windows-1256">
 <title>Insert title here</title>
+<!-- Bootstrap core CSS -->
+<link href="${pageContext.request.contextPath}/style/bootstrap.min.css"
+	rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="${pageContext.request.contextPath}/style/signin.css"
+	rel="stylesheet">
 </head>
 <body>
 
-	Bonjour <c:out value="${sessionScope.gameState.user.nom}" />
+	Bonjour
+	<c:out value="${sessionScope.gameState.user.nom}" />
+	<a href="${pageContext.request.contextPath}/back/bestScore">Meilleurs
+		scores</a>|
+	<a href="${pageContext.request.contextPath}/back/ReinitGameServlet">Réinitialiser
+		le jeu</a>|
+	<a href="${pageContext.request.contextPath}/DeconnectServlet">Se
+		deconnecter</a> |
 
-	<h1>Meilleurs score des autres joueurs</h1>
-	<a href="${pageContext.request.contextPath}/back/bestScore">Consulter</a>
+
+
+
 
 	<h1>Mon meilleur Score avec Java</h1>
 
