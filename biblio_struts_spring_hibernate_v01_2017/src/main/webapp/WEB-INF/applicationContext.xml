@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<property name="url">
+			<value>jdbc:mysql://localhost/db_app_biblio_for_students</value>
+		</property>
+		<property name="username">
+			<value>root</value>
+		</property>
+		<property name="password">
+			<value>boudaa</value>
+		</property>
+	</bean>
+
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource">
+
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>com/app/business/dao/hbm/Book.hbm.xml</value>
+				<value>com/app/business/dao/hbm/Theme.hbm.xml</value>
+				<value>com/app/business/dao/hbm/Rayon.hbm.xml</value>
+				<value>com/app/business/dao/hbm/Lecteur.hbm.xml</value>
+
+			</list>
+		</property>
+
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQL5Dialect
+				</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+
+				<prop key="hibernate.transaction.factory_class">
+					org.hibernate.transaction.JDBCTransactionFactory
+				</prop>
+			</props>
+
+		</property>
+
+
+	</bean>
+
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<tx:advice id="defaultTxAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="create*" propagation="REQUIRED" />
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="edit*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="remove*" propagation="REQUIRED" />
+			<tx:method name="restore*" propagation="REQUIRED" />
+			<tx:method name="loadUserByUsername*" propagation="REQUIRED" />
+			<tx:method name="*" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+	<aop:config>
+		<aop:pointcut id="defaultServiceOperation"
+			expression="execution(* com.app.business.service.impl.*Service*.*(..))" />
+		<aop:advisor pointcut-ref="defaultServiceOperation"
+			advice-ref="defaultTxAdvice" />
+	</aop:config>
+
+
+
+	<bean id="lecteurDAOBean" class="com.app.business.dao.impl.LecteurDaoImpl">
+
+		<property name="sessionFactory" ref="sessionFactory"></property>
+
+	</bean>
+	<bean id="lecteurService" class="com.app.business.service.impl.LecteurServiceImpl">
+		<property name="lecteurDao" ref="lecteurDAOBean"></property>
+	</bean>
+
+	<bean id="lecteurAction" class="com.web.LecteurAction" scope="prototype">
+		<property name="lecteurService" ref="lecteurService"></property>
+	</bean>
+
+
+
+	<bean id="bookDao" class="com.app.business.dao.impl.BookDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+
+
+
+
+	<bean id="bookService" class="com.app.business.service.impl.BookServiceImpl">
+		<property name="bookDao" ref="bookDao"></property>
+		<property name="rayonDao" ref="rayonDao"></property>
+		<property name="themeDao" ref="themeDao"></property>
+	</bean>
+
+
+
+	<bean id="rayonDao" class="com.app.business.dao.impl.RayonDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="themeDao" class="com.app.business.dao.impl.ThemeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+
+
+	<!-- ATTENTION les actions ne sont pas des singletons il faut l'indiquer 
+		explicitement à spring par singleton=false ou dans les versions récentes 
+		du framewrok par scope="prototype" -->
+
+	<bean id="bookAction" class="com.web.BookAction" scope="prototype">
+		<property name="bookService" ref="bookService"></property>
+	</bean>
+</beans>
