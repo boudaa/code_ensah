@@ -37,21 +37,21 @@
 		<sjdt:datatables datatablesTheme="jqueryui" buttons="true"
 			dom="Blfrtip" lengthMenu="[5,10,15,20]" pageLength="15"
 			responsive="true" style="width:100%;">
-			<caption class="ui-widget-header">Liste des produits</caption>
+			<caption class="ui-widget-header">Liste des client</caption>
 			<thead>
 				<tr>
 					<th>ID</th>
-					<th>Nom du produit</th>
-					<th>Prix</th>
+					<th>Nom</th>
+					<th>Prénom</th>
 
 				</tr>
 			</thead>
 			<tbody>
-				<s:iterator value="listProduits">
+				<s:iterator value="listClients">
 					<tr>
 						<td>${id}</td>
 						<td>${nom}</td>
-						<td>${prix}</td>
+						<td>${prenom}</td>
 					</tr>
 				</s:iterator>
 			</tbody>

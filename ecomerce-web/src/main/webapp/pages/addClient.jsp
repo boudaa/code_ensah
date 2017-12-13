@@ -23,18 +23,18 @@
 </head>
 <body>
 	<div align="center">
-		<h1>Gestion des produits</h1>
-		<h2>Ajout d'un produit</h2>
+		<h1>Gestion des clients</h1>
+		<h2>Ajout d'un client</h2>
 
-		<s:form action="addProduit" method="post">
+		<s:form action="addClient" method="post">
 
 			<div class="type-text">
-				<s:textfield label="nom produit" name="produit.nom" />
+				<s:textfield label="nom " name="client.nom" />
 			</div>
 			<div class="type-text">
-				<s:textfield label="Prix " name="produit.prix" />
+				<s:textfield label="Prénom " name="client.prenom" />
 			</div>
-			<sj:submit value="Save produit" />
+			<sj:submit value="Save" />
 
 		</s:form>
 

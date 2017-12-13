@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+
+<struts>
+
+
+
+	<!-- c'est Spring maintenant qui gère le cycle de vie des classes d'action -->
+	<constant name="struts.objectFactory" value="spring" />
+
+
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+
+	<constant name="struts.devMode" value="false" />
+
+
+
+	<package name="tp1package" namespace="/" extends="struts-default">
+
+		<default-action-ref name="showFormAdd" />
+
+
+		<global-results>
+			<result name="error">/pages/error.jsp</result>
+		</global-results>
+
+
+
+
+		<action name="showFormAdd" class="bookAction" method="showFormSave">
+
+			<result name="saveform">/pages/form.jsp</result>
+
+		</action>
+		<action name="showFormUpdate" class="bookAction" method="showFormUpdate">
+
+			<result name="updateform">/pages/formModifyBook.jsp</result>
+
+		</action>
+
+
+
+		<action name="addBook" class="bookAction" method="processFormData">
+			<result name="input">/pages/form.jsp</result>
+			<result name="success" type="redirect">listAction</result>
+
+		</action>
+
+		<action name="addLecteur" class="lecteurAction" method="addLecteur">
+			<result name="success" type="redirect">listAction</result>
+
+		</action>
+
+
+		<action name="updateBook" class="bookAction" method="updateBook">
+			<result name="input">/pages/formModifyBook.jsp</result>
+			<result name="success">/pages/formModifyBook.jsp</result>
+
+		</action>
+
+
+		<action name="deleteBook" class="bookAction" method="deleteBook">
+			<result name="success" type="redirect">listAction</result>
+		</action>
+
+
+		<action name="listAction" class="bookAction" method="list">
+
+
+			<result name="success">/pages/list.jsp</result>
+		</action>
+
+		<action name="showSearchForm">
+
+			<result>/pages/showSearchForm.jsp</result>
+
+		</action>
+
+
+
+		<action name="searchAction" class="com.web.BookAction" method="searchBook">
+
+
+			<result name="success">/pages/list.jsp</result>
+
+		</action>
+
+
+
+
+
+
+	</package>
+
+
+
+</struts>

@@ -16,7 +16,19 @@
 
 	<dependencies>
 
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.10.0</version>
+		</dependency>
 
+
+
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>2.10.0</version>
+		</dependency>
 		<dependency>
 			<groupId>com.ensah</groupId>
 			<artifactId>ecomerce_bll</artifactId>
@@ -27,6 +39,13 @@
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-convention-plugin</artifactId>
+			<version>2.5.14</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-json-plugin</artifactId>
 			<version>2.5.14</version>
 		</dependency>
 
@@ -93,6 +112,11 @@
 		</dependency>
 
 
+		<dependency>
+			<groupId>displaytag</groupId>
+			<artifactId>displaytag</artifactId>
+			<version>1.2</version>
+		</dependency>
 
 
 

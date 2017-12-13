@@ -15,6 +15,8 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.bo.Categorie;
+import com.bo.Client;
 import com.bo.Produit;
 
 @Configuration
@@ -51,7 +53,11 @@ public class AppConfig {
 		final LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 		sessionFactory.setDataSource(getDataSource());
 		sessionFactory.setHibernateProperties(hibernateProperties());
+		
+		
 		sessionFactory.setAnnotatedClasses(Produit.class);
+		sessionFactory.setAnnotatedClasses(Client.class);
+		sessionFactory.setAnnotatedClasses(Categorie.class);
 
 		if (sessionFactory != null) {
 			LOGGER.debug(" sessionFactory created ...");
