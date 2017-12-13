@@ -36,4 +36,8 @@ public class GsProduitServiceImpl implements GsProduitService {
 		return produitDao.getAll();
 	}
 
+	public Produit getProduitById(Long pId) {
+		return produitDao.findById(pId);
+	}
+
 }

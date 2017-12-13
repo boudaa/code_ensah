@@ -16,7 +16,11 @@ public interface GsProduitService {
 	/** implemente le service métier permettant de sauvgarder un produit */
 	void addProduit(Produit p);
 
-	/** implémente le service métier permettant de récupérer tous les produits */
+	/**
+	 * implémente le service métier permettant de récupérer tous les produits
+	 */
 	List<Produit> getAllProducts();
+
+	Produit getProduitById(Long pId);
 
 }

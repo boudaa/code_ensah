@@ -18,5 +18,7 @@ public interface GsClientService {
 
 	/** implémente le service métier permettant de récupérer tous les produits */
 	List<Client> getAllClients();
+	
+	Client   getClientById(Long pId);
 
 }

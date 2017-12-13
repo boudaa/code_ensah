@@ -1,17 +1,19 @@
 package com.actions;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.ResultPath;
+import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bo.Client;
 import com.services.GsClientService;
 
 @ResultPath("/pages/")
-public class GsClientAction extends BaseAction {
+public class GsClientAction extends BaseAction implements SessionAware {
 
 	/**
 	 * utilisée pour stocker la liste des produits destinés à afficher dans la
@@ -21,6 +23,8 @@ public class GsClientAction extends BaseAction {
 
 	/** utilisé pour stocker les données du produit saisies dans la vue */
 	private Client client;
+
+	private Map<String, Object> session;
 
 	/** injection du service métier */
 	@Autowired
@@ -37,6 +41,20 @@ public class GsClientAction extends BaseAction {
 		gsClientService.addClient(client);
 
 		// On retoune la page associée à success
+		return SUCCESS;
+
+	}
+
+	@Action(value = "simuAuth", results = { @Result(name = "success", type="redirectAction", location = "getAllProducts") })
+	public String simuAuth() {
+
+		Client client = gsClientService.getClientById(Long.valueOf(1));
+
+		if (client != null) {
+			session.put("client", gsClientService.getClientById(Long.valueOf(1)));
+
+		}
+
 		return SUCCESS;
 
 	}
@@ -78,4 +96,8 @@ public class GsClientAction extends BaseAction {
 		this.gsClientService = gsClientService;
 	}
 
+	public void setSession(Map<String, Object> pSession) {
+		session = pSession;
+
+	}
 }

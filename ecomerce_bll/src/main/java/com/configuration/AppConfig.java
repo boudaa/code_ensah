@@ -17,6 +17,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.bo.Categorie;
 import com.bo.Client;
+import com.bo.Commande;
+import com.bo.LignePanier;
+import com.bo.Panier;
 import com.bo.Produit;
 
 @Configuration
@@ -53,11 +56,16 @@ public class AppConfig {
 		final LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 		sessionFactory.setDataSource(getDataSource());
 		sessionFactory.setHibernateProperties(hibernateProperties());
+
+		sessionFactory.setAnnotatedClasses(
+		Produit.class,
+		Categorie.class,
+		Panier.class,
+		LignePanier.class,
+		Commande.class,
+		Client.class);
 		
-		
-		sessionFactory.setAnnotatedClasses(Produit.class);
-		sessionFactory.setAnnotatedClasses(Client.class);
-		sessionFactory.setAnnotatedClasses(Categorie.class);
+		//méthode à tester setAnnotatedPackages("com.bo");
 
 		if (sessionFactory != null) {
 			LOGGER.debug(" sessionFactory created ...");

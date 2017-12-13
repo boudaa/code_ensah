@@ -23,22 +23,24 @@
 </head>
 <body style="width: 60%; margin: auto">
 
-	<h2>Catalogue des produits</h2>
-		<a href="monPanier"> Mon Panier</a>
+	<h2>Mon Panier</h2>
 
 	<div id="divdt">
 
-		<d:table name="listProduits" export="true"
-			requestURI="/getAllProducts"
+		<d:table name="panier.lignePanierList" export="true"
+			requestURI="/monPanier"
 			decorator="com.decorators.PanierActionsDecorator" pagesize="20">
-			<d:column property="id" title="ID" />
-			<d:column property="nom" title="Nom produit" sortable="true" />
-			<d:column property="prix" title="Prix" />
-			<d:column property="addToPanierLink" title="Action" media="html" />
+			<d:column property="produit.id" title="ID" />
+			<d:column property="produit.nom" title="Nom produit" sortable="true" />
+			<d:column property="quantite" title="quantite" />
+			<d:column property="montant" title="montant" />
+
+			<%--<d:column property="addToPanierLink" title="Action" media="html" /> --%>
+
 
 		</d:table>
 
-
+		<a href="validerPanier">Valider</a>
 	</div>
 </body>
 </html>

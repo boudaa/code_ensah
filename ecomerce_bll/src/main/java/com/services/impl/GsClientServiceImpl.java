@@ -39,4 +39,8 @@ public class GsClientServiceImpl implements GsClientService {
 		return clientDao.getAll();
 	}
 
+	public Client getClientById(Long pId) {
+		return clientDao.findById(pId);
+	}
+
 }

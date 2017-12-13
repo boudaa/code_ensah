@@ -16,6 +16,11 @@ public class Produit {
 
 	private double prix;
 
+	@Override
+	public String toString() {
+		return "Produit [id=" + id + ", nom=" + nom + ", prix=" + prix + "]";
+	}
+
 	public Long getId() {
 		return id;
 	}
