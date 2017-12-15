@@ -14,7 +14,7 @@ public class LignePanier {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "produit_fk")
 	private Produit produit;
 
