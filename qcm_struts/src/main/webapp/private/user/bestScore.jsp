@@ -17,7 +17,7 @@
 		<br /> Réalisé par :
 		<s:property value="bestQcm.utilisateur.nom" />
 		<s:property value="bestQcm.utilisateur.prenom" /><br />
-		Réalisé le :<s:property value="bestQcm.dateRea" />
+		Réalisé  le :<s:property value="bestQcm.dateRea" />
 
 	</div>
 </div>

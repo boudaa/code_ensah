@@ -3,7 +3,7 @@ package com.app.business.bo;
 import java.util.List;
 
 /**
- * Permet de d�finir un rayon dans la biblioth�que
+ * Permet de définir un rayon dans la bibliothéque
  * 
  * @author BOUDAA
  *

@@ -6,75 +6,40 @@
 
 <struts>
 
+	<package name="default" namespace="/" extends="struts-default">
+		<interceptors>
+			<interceptor name="QcmLoginInterceptor" class="com.web.interceptors.LoginInterceptor" />
 
 
-	<!-- c'est Spring maintenant qui gère le cycle de vie des classes d'action -->
+			<interceptor name="QcmUserInterceptor" class="com.web.interceptors.UserInterceptor" />
+
+			<interceptor name="QcmAdminInterceptor" class="com.web.interceptors.AdminInterceptor" />
+
+
+			<interceptor-stack name="userStack">
+				<interceptor-ref name="QcmLoginInterceptor" />
+				<interceptor-ref name="QcmUserInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+
+			<interceptor-stack name="adminStack">
+				<interceptor-ref name="QcmLoginInterceptor" />
+				<interceptor-ref name="QcmAdminInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+
+
+
+	</package>
+
+
+
+
 	<constant name="struts.objectFactory" value="spring" />
-
-
-	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
 	<constant name="struts.devMode" value="true" />
+	<constant name="struts.convention.default.parent.package"
+		value="default" />
 
-
-	<!--============ Zone privée ============ -->
-	<package name="privatePackage" namespace="/private" extends="struts-default">
-		<action name="initUserHome" class="securityAction" method="initUserHome">
-			<result name="successUser" type="redirectAction">user/showQcm
-			</result>
-			<result name="successAdmin" type="redirectAction">admin/listUsers
-			</result>
-		</action>
-		<action name="denied" class="securityAction" method="denied">
-			<result name="success">accessDenied.jsp</result>
-		</action>
-	</package>
-
-
-	<package name="userPackage" namespace="/private/user" extends="struts-default">
-
-		<action name="showQcm" class="qcmAction" method="buildQcm">
-			<result name="success">qcm.jsp</result>
-		</action>
-		<action name="repondreQCM" class="qcmAction" method="repondreQCM">
-			<result name="success">score.jsp</result>
-		</action>
-		
-		<action name="bestScore" class="qcmAction" method="bestScore">
-			<result name="success">bestScore.jsp</result>
-		</action>
-		
-		
-		
-	</package>
-
-	<package name="adminPackage" namespace="/private/admin"
-		extends="struts-default">
-
-		<action name="listUsers" class="userAction" method="listUsers">
-			<result name="success">listUsers.jsp</result>
-		</action>
-
-		<action name="showFormAddUser" class="userAction" method="initFormAddUser">
-			<result name="success">formAddUser.jsp</result>
-		</action>
-		<action name="addUser" class="userAction" method="addUser">
-			<result name="success" type="redirectAction">listUsers</result>
-		</action>
-
-
-
-	</package>
-
-	<!--============ Zone public ============ -->
-
-	<package name="publicPackage" namespace="/public" extends="struts-default">
-
-
-		<action name="showLoginPage" class="securityAction" method="showLoginPage">
-			<result name="success">login.jsp</result>
-		</action>
-
-
-	</package>
 
 </struts>

@@ -1,14 +1,15 @@
 package com.web.actions;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.ResultPath;
+import org.apache.struts2.convention.annotation.Results;
 import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -20,9 +21,29 @@ import com.services.QcmService;
 import com.services.UtilisateurService;
 import com.web.BaseAction;
 
+// Pour les actions de cette classe on les intercepte avec la pile d'intecepteur
+// userStack définit dans le fichier strust.xml
+// cette pile permet d'authentifier l'utilisateur et de vérifier ses droit
+// En effet l'admin ne peut pas executer les actions de cette classe car
+// QcmUserInterceptor va l'interdire d'accéder
 
+@InterceptorRef(value = "userStack")
+
+// path des vues de cette action
 @ResultPath("/private/user/")
 
+// Résultat global partagé par toutes les méthodes de cette classes
+@Results({ @Result(name = "login", location = "/public/login.jsp"),
+
+})
+
+/**
+ * Cette classe implémente les actions liées au jeu QCM
+ * 
+ * 
+ * @author Tarik BOUDAA
+ *
+ */
 public class QcmAction extends BaseAction implements SessionAware {
 
 	/** Le service de la couche metier permettant la gestion des QCM */
@@ -98,6 +119,8 @@ public class QcmAction extends BaseAction implements SessionAware {
 			return ERROR;
 		}
 
+		// On stocke le résultat du QCM dans la base de données en appelant le
+		// service métier
 		qcm.setUtilisateur(userQcm);
 		// le score
 		qcm.setScore(score);
@@ -114,6 +137,8 @@ public class QcmAction extends BaseAction implements SessionAware {
 			@Result(name = "error", location = "error.jsp"), })
 	public String bestScore() {
 
+		// On appel le service métier pour récupérer le best score de tous les
+		// joueurs
 		bestQcm = qcmService.getBestScore();
 		return SUCCESS;
 	}

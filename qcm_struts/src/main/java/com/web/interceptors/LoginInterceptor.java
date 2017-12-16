@@ -21,6 +21,8 @@ public class LoginInterceptor extends AbstractInterceptor {
 		// si déjà authentifié
 
 		if (session != null && session.get("user") != null) {
+			
+			
 
 			/* Appeler l' action ou l' intercepteur suivant */
 			return invocation.invoke();

@@ -15,7 +15,7 @@ import com.opensymphony.xwork2.ActionSupport;
  * a basic class for struts action, define some useful methods to access session
  * and request objects
  * 
- * @author BOUDAA
+ * @author T.BOUDAA
  * 
  */
 public class BaseAction extends ActionSupport {
@@ -51,8 +51,6 @@ public class BaseAction extends ActionSupport {
 		session.setAttribute(MESSAGES, lMessages);
 	}
 
-	
-	
 	/**
 	 * puts a message in the request
 	 * 
@@ -63,7 +61,7 @@ public class BaseAction extends ActionSupport {
 	protected void saveMessageInRequest(String pMsg) {
 
 		// We get the request
-		HttpServletRequest  rq=  getRequest()  ;
+		HttpServletRequest rq = getRequest();
 
 		// We get messages stored in the http session
 		List<String> lMessages = (List<String>) rq.getAttribute(MESSAGES);
@@ -80,7 +78,7 @@ public class BaseAction extends ActionSupport {
 		// store the collection in the request
 		rq.setAttribute(MESSAGES, lMessages);
 	}
-	
+
 	/**
 	 * allows the access to the http request object
 	 * 

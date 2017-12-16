@@ -8,7 +8,9 @@ import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
@@ -17,6 +19,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.bo.Qcm;
 import com.bo.Question;
+import com.bo.security.Role;
 import com.bo.security.Utilisateur;
 
 @Configuration
@@ -79,7 +82,7 @@ public class AppConfig {
 	public DataSource getDataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/ecomerce");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/qcm");
 
 		dataSource.setUsername("root");
 		dataSource.setPassword("");

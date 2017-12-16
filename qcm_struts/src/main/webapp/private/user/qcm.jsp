@@ -12,7 +12,7 @@
 	<div style="width: 1200px; margin-top: 50px">
 		<h2>Réaliser un QCM</h2>
 
-		<s:form namespace="/user" action="repondreQCM" method="POST"
+		<s:form namespace="/" action="repondreQCM" method="POST"
 			theme="simple">
 	
 

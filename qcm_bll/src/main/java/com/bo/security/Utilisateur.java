@@ -3,24 +3,46 @@ package com.bo.security;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import com.bo.Qcm;
 
+@Entity
+@Table(name = "Utilisateur")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Utilisateur {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idUtilisateur;
+	
 	private String nom;
 	private String prenom;
 	private String login;
-
 	private String email;
-
 	private String password;
-
 	private boolean enabled = true;
 	private boolean accountNotExpired = true;
 	private boolean accountNotLocked = true;
 	private Date lastAccessDate;
+	
+	@OneToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="role_fk")
 	private Role role;
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "utilisateur_id")
 	private Set<Qcm> qcms;
 
 	public Utilisateur() {

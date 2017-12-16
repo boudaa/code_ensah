@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<!--Fichier de mapping pour Rayon -->
+
+<hibernate-mapping>
+    <class name="com.app.business.bo.Rayon" table="RAYON">
+        <id name="idRayon" type="java.lang.Long">
+            <column name="IDRAYON" />
+            <generator class="increment" />
+        </id>
+        <property name="nom" type="java.lang.String">
+            <column name="NOM" />
+        </property>
+       
+        <list name="themes" inverse="false" table="THEME" lazy="true">
+            <key>
+                <column name="IDRAYON" />
+            </key>
+            <list-index></list-index>
+            <one-to-many class="com.app.business.bo.Theme" />
+        </list>
+    </class>
+</hibernate-mapping>

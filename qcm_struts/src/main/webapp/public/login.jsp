@@ -37,7 +37,7 @@
 		<div class="card"></div>
 		<div class="card">
 			<h1 class="title">Authentification</h1>
-			<s:form action="login" method="POST">
+			<s:form action="loginAction" method="POST">
 
 				<div class="type-text">
 					<s:textfield label="login" name="userName" />
@@ -50,7 +50,21 @@
 			</s:form>
 		</div>
 	</div>
+	<div style="margin-bottom: 20px">
+		<s:if test="hasActionMessages()">
+			<div class="msgok">
+				<s:actionmessage />
+			</div>
+		</s:if>
 
+
+		<s:if test="hasActionErrors()">
+			<div class="errors">
+				<s:actionerror />
+			</div>
+		</s:if>
+
+	</div>
 	<script
 		src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 
