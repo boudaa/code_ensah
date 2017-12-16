@@ -1,0 +1,118 @@
+-- MySQL Administrator dump 1.4
+--
+-- ------------------------------------------------------
+-- Server version	5.7.11-log
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+
+--
+-- Create schema db_qcm
+--
+
+CREATE DATABASE IF NOT EXISTS db_qcm;
+USE db_qcm;
+
+--
+-- Definition of table `question`
+--
+
+DROP TABLE IF EXISTS `question`;
+CREATE TABLE `question` (
+  `IDQUESTION` bigint(20) NOT NULL,
+  `TEXTE` varchar(555) DEFAULT NULL,
+  `REPONSE` int(11) DEFAULT NULL,
+  PRIMARY KEY (`IDQUESTION`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `question`
+--
+
+/*!40000 ALTER TABLE `question` DISABLE KEYS */;
+INSERT INTO `question` (`IDQUESTION`,`TEXTE`,`REPONSE`) VALUES 
+ (1,'Parmis les framework suivants, quel est le framework utilisé pour l\'ORM ? A- Spring B- Struts C-Hibernate',3),
+ (2,'Avec quel objet, dans les Servlets, récupère-t-on les données d’un formulaire? A-HttpServletResponse B-HttpServletForms C-HttpServletRequest',3),
+ (3,'Quel est l\'objet qui permet d\'accéder aux paramètres d\'initialisation d\'une servlet ? A-ServletConfig B-ServletContext C-Les deux',1),
+ (4,'Quel est l\'objet qui permet d\'accéder aux paramètres d\'initialisation de l\'application ? A- ServletConfig B-Les deux  C-ServletContext',2),
+ (5,'À quoi sert une session ? A-Elle permet au serveur d\'identifier le client B-Elle permet d\'envoyer des requêtes HTTP C-Elle permet au serveur d’authentifier le client',1),
+ (6,'Le serveur ne crée une session qu’après authentification de l’utilisateur par un login et mot de passe ? A-Vrai.  B- Faux C- Vrai que si l’application contient un formulaire de login',2),
+ (7,'Comment le serveur arrive à retrouver la session à utiliser ? A-Un identifiant de session est envoyé du serveur au client et vice et versa. B-Le serveur stocke toutes les adresses IP des postes client. C-	 En utilisant le login et mot de passe de l’utilisateur \r\n',1),
+ (8,'Pour les servlets. A-	une seule instance traite simultanément les requêtes identiques grâce au multithreading. B-pour des requêtes identiques plusieurs instances de Servlet seront crées  \r\n',1),
+ (9,'Quel objet permet de créer un cookie ? A- HttpSession. B- HttpCookie.C- Cookie.',3),
+ (10,'Les instances des Servlet sont crées par  A- le conteneur de Servlet  B-  automatiquement par le navigateur Web   C-  par JavaScript',1);
+/*!40000 ALTER TABLE `question` ENABLE KEYS */;
+
+
+--
+-- Definition of table `role`
+--
+
+DROP TABLE IF EXISTS `role`;
+CREATE TABLE `role` (
+  `ID` bigint(20) NOT NULL,
+  `ROLENAME` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `role`
+--
+
+/*!40000 ALTER TABLE `role` DISABLE KEYS */;
+INSERT INTO `role` (`ID`,`ROLENAME`) VALUES 
+ (1,'ROLE_USER'),
+ (2,'ROLE_ADMIN');
+/*!40000 ALTER TABLE `role` ENABLE KEYS */;
+
+
+--
+-- Definition of table `utilisateur`
+--
+
+DROP TABLE IF EXISTS `utilisateur`;
+CREATE TABLE `utilisateur` (
+  `IDUTILISATEUR` bigint(20) NOT NULL,
+  `NOM` varchar(255) DEFAULT NULL,
+  `PRENOM` varchar(255) DEFAULT NULL,
+  `LOGIN` varchar(255) DEFAULT NULL,
+  `EMAIL` varchar(255) DEFAULT NULL,
+  `PASSWORD` varchar(255) DEFAULT NULL,
+  `ENABLED` tinyint(1) DEFAULT NULL,
+  `ACCOUNTNOTEXPIRED` tinyint(1) DEFAULT NULL,
+  `ACCOUNTNOTLOCKED` tinyint(1) DEFAULT NULL,
+  `LASTACCESSDATE` datetime DEFAULT NULL,
+  `ROLE` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`IDUTILISATEUR`),
+  KEY `FK5D69C763AA686FE6` (`ROLE`),
+  CONSTRAINT `FK5D69C763AA686FE6` FOREIGN KEY (`ROLE`) REFERENCES `role` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `utilisateur`
+--
+
+/*!40000 ALTER TABLE `utilisateur` DISABLE KEYS */;
+INSERT INTO `utilisateur` (`IDUTILISATEUR`,`NOM`,`PRENOM`,`LOGIN`,`EMAIL`,`PASSWORD`,`ENABLED`,`ACCOUNTNOTEXPIRED`,`ACCOUNTNOTLOCKED`,`LASTACCESSDATE`,`ROLE`) VALUES 
+ (307,'administrator','administrator','administrator','administrator','b7338dcc17d6b6c199a75540aab6d0506567b980',1,1,1,'2017-05-21 22:11:47',2),
+ (308,'user','user','user','user','b6b1f4781776979c0775c71ebdd8bdc084aac5fe',1,1,1,'2017-05-21 21:17:35',1);
+/*!40000 ALTER TABLE `utilisateur` ENABLE KEYS */;
+
+
+
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
