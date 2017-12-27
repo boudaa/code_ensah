@@ -189,6 +189,7 @@ public class MainFrame extends JFrame {
 	}
 
 	public static void main(String[] args) {
+		displayUtils("début méthode main");
 
 		// On créer la fentre dans l'EDT (Event Dispatch Thread)
 
