@@ -29,6 +29,9 @@ public class MainFrame extends JFrame {
 	/** Permet de lancer les déplacements du Lapin */
 	private JButton btnLapin = new JButton("Déplacer Lapin");
 
+	/** Permet de recharger le fichier XML */
+	private JButton btnReinit = new JButton("Réinitialiser");
+
 	private JLabel stateLabel = new JLabel("...........");
 
 	public MainFrame() {
@@ -93,11 +96,20 @@ public class MainFrame extends JFrame {
 
 		});
 
+		// réintialise les animaux a partir de l'XML
+		btnReinit.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent evt) {
+				janglePan.reinitAll();
+			}
+		});
+
 		// Création d'un paneau qui va contenir les boutons de l'application
 		JPanel menuPan = new JPanel();
 		// ajout d boutons dans le paneau menu
 		menuPan.add(btnLapin);
 		menuPan.add(btnLion);
+		menuPan.add(btnReinit);
 
 		// le paneau menu est ajouté au nord de la fentre
 		add(menuPan, BorderLayout.NORTH);
@@ -184,8 +196,7 @@ public class MainFrame extends JFrame {
 	public static void displayUtils(String pMsg) {
 		Thread currentThread = Thread.currentThread();
 
-		System.out.println("L'opération " + pMsg
-				+ " s'execute dans le thread  : " + currentThread.getName());
+		System.out.println("L'opération " + pMsg + " s'execute dans le thread  : " + currentThread.getName());
 	}
 
 	public static void main(String[] args) {

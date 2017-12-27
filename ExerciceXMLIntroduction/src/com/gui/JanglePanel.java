@@ -37,6 +37,10 @@ public class JanglePanel extends JPanel {
 		return end - start;
 
 	}
+	
+	public void reinitAll(){
+		animals = xmlReader.getAnimals();
+	}
 
 	public JanglePanel() {
 
