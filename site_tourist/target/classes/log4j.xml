@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd" >
+<log4j:configuration>
+
+
+	<!--Journalisation dans un fichier -->
+
+	<appender name="file" class="org.apache.log4j.RollingFileAppender">
+	<param name="maxFileSize" value="10000KB" />
+	<param name="maxBackupIndex" value="1" />
+	<param name="File" value="H:\\dev_env\\apps_log\\studentslog.txt" />
+	<param name="threshold" value="debug" />
+	<layout class="org.apache.log4j.PatternLayout">
+	<param name="ConversionPattern" value="%d{ISO8601} %5p [%c{1}] %m%n" 
+		/> 
+	</layout>
+	</appender>
+
+
+
+	<!--Journalisation dans la console -->
+
+	<appender name="stdout" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{ISO8601} %5p [%c{1}]   %m %n" />
+		</layout>
+	</appender>
+	<logger name="org.hibernate">
+		<level value="OFF" />
+	</logger>
+	<logger name="org.springframework">
+		<level value="OFF" />
+	</logger>
+	<logger name="org.apache.commons">
+		<level value="OFF" />
+	</logger>
+	<logger name="com.opensymphony.xwork2">
+		<level value="OFF" />
+	</logger>
+	<logger name="org.apache.struts2">
+		<level value="OFF" />
+	</logger>
+	<logger name="freemarker.beans">
+		<level value="OFF" />
+	</logger>
+	<logger name="freemarker.cache">
+		<level value="OFF" />
+	</logger>
+	<logger name="org.displaytag">
+		<level value="OFF" />
+	</logger>
+
+	<root>
+		<priority value="debug"></priority>
+		<appender-ref ref="file" />
+		<appender-ref ref="stdout" />
+	</root>
+</log4j:configuration>
