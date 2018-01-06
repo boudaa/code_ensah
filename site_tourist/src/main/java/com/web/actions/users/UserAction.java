@@ -3,6 +3,7 @@ package com.web.actions.users;
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Actions;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.ResultPath;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,13 @@ public class UserAction extends BaseAction {
 
 	}
 
+	@Actions({
+	@Action(value = "/", results = { @Result(name = "success", location = "listDistinations.jsp") }),
+
 	@Action(value = "/getAllDestinations", results = { @Result(name = "success", location = "listDistinations.jsp") })
+
+	})
+
 	public String getAllDestinationss() {
 
 		destinations = destinationService.getAllDestinations();
