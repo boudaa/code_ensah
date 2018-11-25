@@ -6,10 +6,10 @@ import java.util.Random;
 import org.apache.log4j.Logger;
 
 import com.bo.Compte;
-import com.dao.DaoFactory;
-import com.dao.TransactionManager;
-import com.dao.TransactionManagerFactory;
-import com.dao.interfaces.CompteDao;
+import com.dao.api.DAOFactory;
+import com.dao.api.TransactionManager;
+import com.dao.api.TransactionManagerFactory;
+import com.dao.interfaces.ICompteDao;
 import com.bo.Client;
 import com.exception.CompteOperationException;
 import com.exception.DataBaseException;
@@ -26,7 +26,7 @@ public class CompteManagerImpl {
 	private Logger LOGGER = Logger.getLogger(CompteManagerImpl.class);
 
 	// On obtient une instance des DAOs
-	private CompteDao compteDao = (CompteDao) DaoFactory.getDao("com.dao.impl.jdbc.CompteDAOImpl");
+	private ICompteDao compteDao = (ICompteDao) DAOFactory.getDao("com.dao.impl.jdbc.CompteDAOImpl");
 
 	/**
 	 * créditer un compte

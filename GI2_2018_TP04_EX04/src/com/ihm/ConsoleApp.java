@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 
 import com.bll.CompteManagerImpl;
 import com.bo.Compte;
-import com.dao.DBConnection;
+import com.dao.api.JDBCConnection;
 import com.bo.Client;
 import com.exception.CompteOperationException;
 import com.exception.DataBaseException;
@@ -47,7 +47,7 @@ public class ConsoleApp {
 	public static void main(String[] args) {
 
 		try {
-			DBConnection.createUniqueConnexion();
+			JDBCConnection.createUniqueConnexion();
 		} catch (DataBaseException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

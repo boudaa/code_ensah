@@ -10,8 +10,9 @@ import java.util.List;
 
 import com.bo.Client;
 import com.bo.Compte;
-import com.dao.DaoFactory;
-import com.dao.interfaces.CompteDao;
+import com.dao.api.DAOFactory;
+import com.dao.api.JDBCGenericDaoImpl;
+import com.dao.interfaces.ICompteDao;
 import com.exception.DataBaseException;
 import com.exception.ObjectNotFoundException;
 
@@ -28,7 +29,7 @@ import com.exception.ObjectNotFoundException;
  * @author Tarik BOUDAA
  * 
  */
-public class CompteDAOImpl extends GdbcDaoBase implements CompteDao {
+public class CompteDAOImpl extends JDBCGenericDaoImpl<Compte, Long> implements ICompteDao {
 
 	private Connection connect;
 
@@ -53,7 +54,7 @@ public class CompteDAOImpl extends GdbcDaoBase implements CompteDao {
 
 			// on commence par persister le client
 			Client lClient = pCompte.getTitulaire();
-			ClientDAOImpl lDaoClient = (ClientDAOImpl) DaoFactory.getDao("com.dao.impl.jdbc.ClientDAOImpl");
+			ClientDAOImpl lDaoClient = (ClientDAOImpl) DAOFactory.getDao("com.dao.impl.jdbc.ClientDAOImpl");
 			Long idClient = lDaoClient.add(lClient);
 
 			// on persiste le compte
@@ -126,7 +127,7 @@ public class CompteDAOImpl extends GdbcDaoBase implements CompteDao {
 				double lMaxdecouvert = result.getDouble("MAXDECOUVERT");
 				double lMaxDebitAutorise = result.getDouble("MAXDEBIT");
 				long lIdPersonne = result.getInt("IDPERSONNE");
-				ClientDAOImpl lDaoClient = (ClientDAOImpl) DaoFactory.getDao("com.dao.impl.jdbc.ClientDAOImpl");
+				ClientDAOImpl lDaoClient = (ClientDAOImpl) DAOFactory.getDao("com.dao.impl.jdbc.ClientDAOImpl");
 				Client lTitulaire = lDaoClient.find(Long.valueOf(lIdPersonne));
 
 				compte = new Compte(lNum, lSolde, lTitulaire, lMaxdecouvert, lMaxDebitAutorise);
@@ -176,7 +177,7 @@ public class CompteDAOImpl extends GdbcDaoBase implements CompteDao {
 
 			PreparedStatement stmtGetCompte = connect.prepareStatement(lGetCompte);
 
-			ClientDAOImpl lDaoClient = (ClientDAOImpl) DaoFactory.getDao("com.dao.impl.jdbc.ClientDAOImpl");
+			ClientDAOImpl lDaoClient = (ClientDAOImpl) DAOFactory.getDao("com.dao.impl.jdbc.ClientDAOImpl");
 			ResultSet result = stmtGetCompte.executeQuery();
 			while (result.next()) {
 

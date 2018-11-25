@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bo.Client;
-import com.dao.interfaces.ClientDao;
+import com.dao.api.JDBCGenericDaoImpl;
+import com.dao.interfaces.IClientDao;
 import com.exception.DataBaseException;
 import com.exception.ObjectNotFoundException;
 
@@ -20,7 +21,7 @@ import com.exception.ObjectNotFoundException;
  * @author Tarik BOUDAA
  * 
  */
-public class ClientDAOImpl extends GdbcDaoBase implements ClientDao {
+public class ClientDAOImpl extends JDBCGenericDaoImpl<Client, Long> implements IClientDao {
 
 	private Connection connect;
 

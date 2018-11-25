@@ -21,3 +21,12 @@
 2018-11-07 21:21:31,382 : ERROR [CompteDAOImpl] :  Error while trying  to find the object with id =   1  due to exception : com.mysql.jdbc.exceptions.MySQLSyntaxErrorException: Unknown column 'NUM' in 'where clause'
 2018-11-07 21:32:04,494 : ERROR [CompteManager] :  Le compte 1 essaie de faire une Opération impossible car le débit maximal est atteint
 2018-11-07 21:35:27,954 : ERROR [CompteManager] :  Le compte 1 essaie de faire une Opération impossible car le débit maximal est atteint
+2018-11-16 17:12:48,703 : ERROR [DBConnection] :  Error while trying to connect to database
+2018-11-27 09:35:38,716 : ERROR [JDBCConnection] :  Error while trying to connect to database
+2018-11-27 09:36:11,696 : ERROR [JDBCConnection] :  Error while trying to connect to database
+2018-11-27 09:36:20,780 : ERROR [JDBCConnection] :  Error while trying to connect to database
+2018-11-27 09:36:47,601 : ERROR [JDBCConnection] :  Error while trying to connect to database
+2018-11-27 09:37:34,608 : ERROR [JDBCConnection] :  Error while trying to connect to database
+2018-11-27 09:38:21,255 : ERROR [JDBCConnection] :  Error while trying to connect to database
+2018-11-27 09:38:59,463 : ERROR [JDBCConnection] :  Error while trying to connect to database
+2018-11-27 09:39:11,403 : ERROR [JDBCConnection] :  Error while trying to connect to database
