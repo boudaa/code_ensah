@@ -1,0 +1,8 @@
+2018-12-02 21:29:41,342 : ERROR [JDBCConnection] :  Error while trying to connect to database
+2018-12-02 21:46:03,650 : ERROR [JDBCConnection] :  Error while trying to connect to database
+2018-12-02 21:47:50,484 : ERROR [JDBCConnection] :  Error while trying to connect to database
+2018-12-02 22:19:49,891 : ERROR [SqlExceptionHelper] :  Table 'dbtest.compte' doesn't exist
+2018-12-02 22:20:36,079 : ERROR [SqlExceptionHelper] :  Unknown column 'compte0_.num' in 'field list'
+2018-12-02 22:22:28,087 : ERROR [SqlExceptionHelper] :  Unknown column 'compte0_.debitMax' in 'field list'
+2018-12-02 22:26:50,976 : ERROR [SqlExceptionHelper] :  Unknown column 'client0_.cni' in 'field list'
+2018-12-02 22:28:52,073 : ERROR [ExceptionMapperStandardImpl] :  HHH000346: Error during managed flush [org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: com.bo.Client]

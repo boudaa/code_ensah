@@ -1,0 +1,14 @@
+2018-12-02 14:05:34,789 : ERROR [SqlExceptionHelper] :  Access denied for user 'test'@'%' to database 'dbtest'
+2018-12-02 14:05:50,118 : ERROR [SqlExceptionHelper] :  Access denied for user 'test'@'%' to database 'dbtest'
+2018-12-02 14:06:20,871 : ERROR [SqlExceptionHelper] :  Access denied for user 'test'@'%' to database 'dbtest'
+2018-12-02 14:06:45,477 : ERROR [SqlExceptionHelper] :  Access denied for user 'test'@'%' to database 'dbtest'
+2018-12-02 14:07:12,984 : ERROR [SqlExceptionHelper] :  Access denied for user 'test'@'%' to database 'dbtest'
+2018-12-02 14:07:27,335 : ERROR [SqlExceptionHelper] :  Access denied for user 'test'@'%' to database 'dbtest'
+2018-12-02 14:07:43,300 : ERROR [SqlExceptionHelper] :  Access denied for user 'test'@'%' to database 'dbtest'
+2018-12-02 14:08:04,130 : ERROR [SqlExceptionHelper] :  Access denied for user 'test'@'%' to database 'dbtest'
+2018-12-02 18:20:38,988 : ERROR [SqlExceptionHelper] :  Communications link failure
+
+Last packet sent to the server was 0 ms ago.
+2018-12-02 18:23:09,116 : ERROR [SqlExceptionHelper] :  Access denied for user 'test'@'%' to database 'dbtest'
+2018-12-02 18:29:45,337 : ERROR [SqlExceptionHelper] :  Access denied for user 'test'@'%' to database 'dbtest'
+2018-12-02 18:34:32,379 : ERROR [SqlExceptionHelper] :  Access denied for user 'test'@'%' to database 'dbtest'
